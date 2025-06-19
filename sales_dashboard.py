@@ -14,16 +14,17 @@ st.set_page_config(
 # --- Load Data (Now reads from your_data.csv) ---
 @st.cache_data
 @st.cache_data
+@st.cache_data
 def load_data():
     try:
         # Load your data from a CSV file
-      df = pd.read_csv("Sample - Superstore.csv", encoding='ISO-8859-1')
-
+        df = pd.read_csv("Sample - Superstore.csv", encoding='ISO-8859-1')
 
         # Ensure 'Order Date' and 'Ship Date' are datetime objects
         df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
         df['Ship Date'] = pd.to_datetime(df['Ship Date'], errors='coerce')
 
+        # Drop rows with invalid dates
         df.dropna(subset=['Order Date', 'Ship Date'], inplace=True)
 
         return df
@@ -32,7 +33,6 @@ def load_data():
     except Exception as e:
         st.error(f"Error loading data: {e}. Please check the file path and format.")
         return None
-
 
 # Load the data
 df = load_data()
