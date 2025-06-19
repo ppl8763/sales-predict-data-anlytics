@@ -17,7 +17,7 @@ def load_data():
     try:
         # Load your data from a CSV file
         # The user has provided a specific path for their data.
-       df = pd.read_csv("sales.csv")  # ✅ only if `sales.csv` is in repo root
+       df = pd.read_csv("Sample - Superstore.csv")  # ✅ only if `sales.csv` is in repo root
 
 
         # Ensure 'Order Date' and 'Ship Date' are datetime objects
