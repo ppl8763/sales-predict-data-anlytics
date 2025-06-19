@@ -17,7 +17,8 @@ st.set_page_config(
 def load_data():
     try:
         # Load your data from a CSV file
-        df = pd.read_csv("Sample - Superstore.csv")
+      df = pd.read_csv("Sample - Superstore.csv", encoding='ISO-8859-1')
+
 
         # Ensure 'Order Date' and 'Ship Date' are datetime objects
         df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
