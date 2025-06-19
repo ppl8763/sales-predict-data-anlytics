@@ -13,31 +13,25 @@ st.set_page_config(
 
 # --- Load Data (Now reads from your_data.csv) ---
 @st.cache_data
+@st.cache_data
 def load_data():
     try:
         # Load your data from a CSV file
-        # The user has provided a specific path for their data.
-       df = pd.read_csv("Sample - Superstore.csv")  # ✅ only if `sales.csv` is in repo root
-
+        df = pd.read_csv("Sample - Superstore.csv")
 
         # Ensure 'Order Date' and 'Ship Date' are datetime objects
-        # This is crucial for date filtering and time-series plots.
-        # Use errors='coerce' to turn unparseable dates into NaT (Not a Time)
         df['Order Date'] = pd.to_datetime(df['Order Date'], errors='coerce')
         df['Ship Date'] = pd.to_datetime(df['Ship Date'], errors='coerce')
 
-        # Drop rows where essential date columns could not be parsed if necessary
         df.dropna(subset=['Order Date', 'Ship Date'], inplace=True)
 
         return df
     except FileNotFoundError:
-        # If the file is not found, return None
         return None
     except Exception as e:
-        # Catch other potential errors during data loading/processing
-        # This message will be displayed after set_page_config
         st.error(f"Error loading data: {e}. Please check the file path and format.")
         return None
+
 
 # Load the data
 df = load_data()
